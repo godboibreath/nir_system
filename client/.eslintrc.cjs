@@ -25,5 +25,6 @@ module.exports = {
         'no-debugger': 'warn',
         'react/prop-types': ['warn', { ignore: ['children'] }],
         'react/state-in-constructor': 'off',
+        'eslint linebreak-style': 'off',
     },
 };
