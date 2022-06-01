@@ -3,15 +3,16 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { fileURLToPath } from 'url';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import DotenvWebpackPlugin from 'dotenv-webpack';
+import ESLintWebpackPlugin from 'eslint-webpack-plugin';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 export default {
     mode: process.env.MODE_DEVELOPMENT ? 'development' : 'production',
-    entry: path.resolve(__dirname, 'index.js'),
+    entry: path.resolve(dirname, 'src/index.js'),
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(dirname, 'build'),
         filename: 'bundle[fullhash].js',
     },
     performance: {
@@ -19,10 +20,10 @@ export default {
         maxAssetSize: 512000,
     },
     devServer: {
-        static: path.resolve(__dirname, 'build'),
+        static: path.resolve(dirname, 'build'),
         historyApiFallback: true,
         port: 5000,
-        open: false,
+        open: true,
         hot: true,
     },
     module: {
@@ -30,6 +31,9 @@ export default {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
+                resolve: {
+                    fullySpecified: false,
+                },
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -42,9 +46,12 @@ export default {
     plugins: [
         new HtmlWebpackPlugin({
             inject: 'body',
-            template: path.resolve(__dirname, 'public/index.html'),
+            template: path.resolve(dirname, 'public/index.html'),
         }),
         new CleanWebpackPlugin(),
         new DotenvWebpackPlugin(),
+        new ESLintWebpackPlugin({
+            emitWarning: false,
+        }),
     ],
 };

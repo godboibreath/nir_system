@@ -14,5 +14,16 @@ module.exports = {
     plugins: ['react'],
     rules: {
         'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
+        'no-unused-vars': ['warn'],
+        'react/function-component-definition': [
+            'warn',
+            {
+                namedComponents: 'arrow-function',
+                unnamedComponents: ['arrow-function'],
+            },
+        ],
+        'no-debugger': 'warn',
+        'react/prop-types': ['warn', { ignore: ['children'] }],
+        'react/state-in-constructor': 'off',
     },
 };
