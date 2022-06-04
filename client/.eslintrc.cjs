@@ -14,7 +14,9 @@ module.exports = {
     plugins: ['react'],
     rules: {
         'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
-        'no-unused-vars': ['warn'],
+        'import/prefer-default-export': 'off',
+        'react/no-array-index-key': 'off',
+        'no-unused-vars': 'warn',
         'react/function-component-definition': [
             'warn',
             {
