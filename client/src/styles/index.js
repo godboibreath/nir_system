@@ -10,6 +10,16 @@ export default () => (
             html,
             body {
                 overscroll-behavior: none;
+                height: 100%;
+            }
+            @media screen and (min-width: 1280px) {
+                html: {
+                    font-size: 14px;
+                }
+            }
+
+            #root {
+                display: contents;
             }
 
             html {
@@ -29,6 +39,8 @@ export default () => (
             ul,
             ol {
                 list-style: none;
+                margin: 0;
+                padding: 0;
             }
 
             a,
