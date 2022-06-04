@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const Sidebar = styled.div`
     width: 15%;
@@ -19,10 +20,15 @@ const List = styled.ul`
 
 const ListItem = styled.li`
     margin: 0.5rem 0;
-    &:first-child {
+    ${({ isActive }) =>
+        isActive &&
+        css`
+            color: #7783a1;
+        `}
+    &:first-of-type {
         margin: 0 0 0.5rem 0;
     }
-    &:last-child {
+    &:last-of-type {
         margin: 0.5rem 0 0 0;
     }
     a {
