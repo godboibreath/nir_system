@@ -1,7 +1,7 @@
 export const linkList = [
     {
         name: 'Главная',
-        link: '/',
+        link: '/dashboard',
         isHome: true,
     },
     {

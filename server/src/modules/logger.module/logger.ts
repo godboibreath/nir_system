@@ -22,7 +22,7 @@ const logger = winston.createLogger({
             all: true,
         }),
         winston.format.printf(({ level, message, timestamp, ...data }) => {
-            const jsonData = Object.keys(data).length > 0 ? JSON.stringify(data, null, 2) : '';
+            const jsonData = Object.keys(data).length > 0 ? JSON.stringify(data) : '';
             return `${moment(timestamp).format('YYYY.MM.DD HH:mm:ss')} [${level}]: ${message}${
                 jsonData ? ` ,data: ${jsonData}` : ''
             }`;

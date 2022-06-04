@@ -9,7 +9,7 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default {
-    mode: process.env.MODE_DEVELOPMENT ? 'development' : 'production',
+    mode: 'development',
     entry: path.resolve(dirname, 'src/index.js'),
     output: {
         path: path.resolve(dirname, 'build'),
