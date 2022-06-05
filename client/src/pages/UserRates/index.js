@@ -1,25 +1,19 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { Table, TableCell, TableRow, TableHead, TableBody } from '@mui/material';
 import { Card, Title } from '../../components';
+import { useFetch } from '../../hooks';
 
 export default () => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const [getData, data, loading, error] = useFetch({ url: '/api/get-data' });
+
     useLayoutEffect(() => {
-        const loadData = async () => {
-            try {
-                const request = await fetch('http://localhost:5005/api/get-data');
-                const jsonData = await request.json();
-                setData(jsonData);
-            } catch (e) {
-                console.error(e.message);
-                setError(true);
-            }
-            setLoading(false);
-        };
-        loadData();
+        getData({
+            params: {
+                table: 'user-rates',
+            },
+        });
     }, []);
+
     return (
         <>
             <Card style={{ marginBottom: '2rem' }}>
@@ -27,20 +21,20 @@ export default () => {
             </Card>
             <Card>
                 {loading && <div style={{ textAlign: 'center' }}>Загрузка данных...</div>}
-                {data.length > 0 && !loading && !error && (
+                {data?.length > 0 && !loading && !error && (
                     <Table>
                         <TableHead>
                             <TableRow>
                                 <TableCell>Название компании</TableCell>
-                                <TableCell>Показатель конкурентоспособности</TableCell>
+                                <TableCell>Оценки пользователей</TableCell>
                                 <TableCell>Дата анализа</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {data.map(({ name, competitive, date }, idx) => (
+                            {data.map(({ name, rate, date }, idx) => (
                                 <TableRow key={`${name}${idx}`}>
                                     <TableCell>{name}</TableCell>
-                                    <TableCell>{+competitive / 5.0}</TableCell>
+                                    <TableCell>{rate}</TableCell>
                                     <TableCell>{date}</TableCell>
                                 </TableRow>
                             ))}
