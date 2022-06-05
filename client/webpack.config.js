@@ -1,15 +1,16 @@
+import 'dotenv/config';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { fileURLToPath } from 'url';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import DotenvWebpackPlugin from 'dotenv-webpack';
 import ESLintWebpackPlugin from 'eslint-webpack-plugin';
+import DotenvWebpackPlugin from 'dotenv-webpack';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default {
-    mode: 'development',
+    mode: process.env.MODE_DEVELOPMENT ? 'development' : 'production',
     entry: path.resolve(dirname, 'src/index.js'),
     output: {
         path: path.resolve(dirname, 'build'),
@@ -49,9 +50,9 @@ export default {
             template: path.resolve(dirname, 'public/index.html'),
         }),
         new CleanWebpackPlugin(),
-        new DotenvWebpackPlugin(),
         new ESLintWebpackPlugin({
             emitWarning: false,
         }),
+        new DotenvWebpackPlugin(),
     ],
 };

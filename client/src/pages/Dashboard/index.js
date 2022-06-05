@@ -1,25 +1,19 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { Table, TableCell, TableRow, TableHead, TableBody } from '@mui/material';
 import { Card, Title } from '../../components';
+import { useFetch } from '../../hooks';
 
 export default () => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const [getData, data, loading, error] = useFetch({ url: '/api/get-data' });
+
     useLayoutEffect(() => {
-        const loadData = async () => {
-            try {
-                const request = await fetch('http://localhost:5005/api/get-data');
-                const jsonData = await request.json();
-                setData(jsonData);
-            } catch (e) {
-                console.error(e.message);
-                setError(true);
-            }
-            setLoading(false);
-        };
-        loadData();
+        getData({
+            params: {
+                table: 'competitive',
+            },
+        });
     }, []);
+
     return (
         <>
             <Card style={{ marginBottom: '2rem' }}>
@@ -27,7 +21,7 @@ export default () => {
             </Card>
             <Card>
                 {loading && <div style={{ textAlign: 'center' }}>Загрузка данных...</div>}
-                {data.length > 0 && !loading && !error && (
+                {data?.length > 0 && !loading && !error && (
                     <Table>
                         <TableHead>
                             <TableRow>
