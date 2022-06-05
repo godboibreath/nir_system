@@ -107,6 +107,16 @@ class ApiController {
             Logger.info(`Api controller error: ${e.message}`);
         }
     };
+
+    public collectUserRates = (req: Request, res: Response) => {
+        try {
+            const { company } = req.body;
+            res.status(200).json({ rate: 4.9 });
+            Logger.info('Send data to client', { rate: 4.9 });
+        } catch (e) {
+            Logger.info(`Api controller error: ${e.message}`);
+        }
+    };
 }
 
 export default new ApiController();
