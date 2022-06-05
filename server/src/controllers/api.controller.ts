@@ -91,7 +91,7 @@ const dummyUserRatesTable = [
 class ApiController {
     private getDummyData(table: string) {
         switch (table) {
-            case 'comptetitive':
+            case 'competitive':
                 return dummyCompetitiveData;
             case 'user-rates':
                 return dummyUserRatesTable;
@@ -101,8 +101,9 @@ class ApiController {
     }
     public getData = (req: Request, res: Response) => {
         try {
-            res.status(200).json(this.getDummyData(req.query.table as string));
-            Logger.info('Send data to client', { dummyCompetitiveData });
+            const data = this.getDummyData(req.query.table as string);
+            res.status(200).json(data);
+            Logger.info('Send data to client', data);
         } catch (e) {
             Logger.info(`Api controller error: ${e.message}`);
         }
