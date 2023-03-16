@@ -14,6 +14,10 @@ class Logger {
     info(message?: any, data?: any) {
         this.logger.info(message, data);
     }
+
+    warning(message?: any, data?: any) {
+        this.logger.warning(message, data);
+    }
 }
 
 export default new Logger();
