@@ -4,11 +4,13 @@ import moment from 'moment';
 const logLevels = {
     levels: {
         notice: 0,
-        info: 1,
+        warning: 1,
+        info: 2,
     },
     colors: {
         notice: 'green',
         info: 'blue',
+        warning: 'yellow',
     },
 };
 

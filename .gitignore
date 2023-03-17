@@ -5,4 +5,8 @@
 /server/node_modules
 /server/.env
 /server/build
+
 /scripts/*.exe
+/scripts/__pycache__
+/scripts/logs.log
+/scripts/.env

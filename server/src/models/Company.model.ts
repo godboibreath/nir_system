@@ -9,6 +9,10 @@ const LinkSchema = new Schema({
         type: Number,
         required: true,
     },
+    selector: {
+        type: String,
+        required: true,
+    },
 });
 
 const CompanySchema = new Schema({

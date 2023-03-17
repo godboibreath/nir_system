@@ -1,8 +1,13 @@
 from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
 
-client = MongoClient('mongodb://127.0.0.1:27017')
+from logger import log
 
-db = client.testdb
+load_dotenv()
 
-for doc in db.cats.find():
-    print(doc['name'])
+client = MongoClient(os.environ['DB_PATH'])
+
+db = client[os.environ['DB_NAME']]
+
+db.companies.update_one({'name': 'Lenovo'}, {'$set': {'userRate': 5.1}})

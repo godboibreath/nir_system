@@ -7,23 +7,28 @@ const Apple = new Company({
     parserOptions: [
         {
             link: 'https://www.mvideo.ru/product-list-page?q=apple&category=smartfony-205&page={pageValue}',
-            pagesCount: 4,
+            pagesCount: 13,
+            selector: '.value.ng-star-inserted',
         },
         {
             link: 'https://www.mvideo.ru/product-list-page?q=apple&category=apple-watch-2947&page={pageValue}',
-            pagesCount: 25,
+            pagesCount: 14,
+            selector: '.value.ng-star-inserted',
         },
         {
             link: 'https://www.mvideo.ru/product-list-page?q=apple&category=zaryadnye-ustroistva-258&page={pageValue}',
             pagesCount: 1,
+            selector: '.value.ng-star-inserted',
         },
         {
             link: 'https://www.mvideo.ru/product-list-page?q=apple&category=naushniki-3967&page={pageValue}',
             pagesCount: 1,
+            selector: '.value.ng-star-inserted',
         },
         {
             link: 'https://www.mvideo.ru/product-list-page?q=apple&category=noutbuki-118&page={pageValue}',
-            pagesCount: 2,
+            pagesCount: 8,
+            selector: '.value.ng-star-inserted',
         },
     ],
 });
@@ -33,8 +38,9 @@ const Samsung = new Company({
     userRate: null,
     parserOptions: [
         {
-            link: 'https://www.mvideo.ru/brand/samsung-13/f/page={pageValue}"',
-            pagesCount: 171,
+            link: 'https://www.mvideo.ru/brand/samsung-13/f/page={pageValue}',
+            pagesCount: 244,
+            selector: '.fl-product-tile-rating__stars-value',
         },
     ],
 });
@@ -45,7 +51,8 @@ const Lenovo = new Company({
     parserOptions: [
         {
             link: 'https://www.mvideo.ru/brand/lenovo-1006/f/page={pageValue}',
-            pagesCount: 34,
+            pagesCount: 33,
+            selector: '.fl-product-tile-rating__stars-value',
         },
     ],
 });
@@ -56,7 +63,8 @@ const Xiaomi = new Company({
     parserOptions: [
         {
             link: 'https://www.mvideo.ru/brand/xiaomi-1083/f/page={pageValue}',
-            pagesCount: 32,
+            pagesCount: 52,
+            selector: '.fl-product-tile-rating__stars-value'
         },
     ],
 });
@@ -68,6 +76,7 @@ export default {
             await Samsung.save();
             await Lenovo.save();
             await Xiaomi.save();
+            Logger.info('Companies migration has passed');
         } catch (error) {
             Logger.warning(`Companies migration have not completed: ${error.message}`);
         }
